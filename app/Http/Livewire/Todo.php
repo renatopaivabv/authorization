@@ -25,6 +25,7 @@ class Todo extends Component
             ->when($this->filter == 'pending', function ($query) {
                 return $query->where('checked', false);
             })
+            ->with('user')
             ->orderBy('checked')
             ->get()
         ]);

@@ -4,7 +4,7 @@
             wire:model="todo.checked">
         <label for="task_{{$todo->id}}">
             <span class="fw-bold">{{$todo->title}}</span>
-            {{-- <span class="text-muted"><small>(Author)</small></span> --}}
+            <span class="text-muted"><small>{{$todo->user->name}}</small></span>
         </label>
     </div>
     <livewire:todo.delete :todo="$todo" />

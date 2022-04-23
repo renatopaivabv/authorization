@@ -21,4 +21,5 @@
         <livewire:todo.item :todo="$todo" :wire:key="$todo->id" />
         @endforeach
     </ul>
+
 </div>
