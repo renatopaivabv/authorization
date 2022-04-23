@@ -10,14 +10,13 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
-
-        // $user = User::first($request->user_id);
         $user = User::find($request->user_id);
         $credentials = [
             'email' => $user->email,
             'password' => 'password',
         ];
-        if (auth()->attempt($credentials)) {
+        if (Auth::login($user)) {
+        // if (auth()->attempt($credentials)) {
             return redirect()->back()->with('success', 'Login Successful');
         }
 

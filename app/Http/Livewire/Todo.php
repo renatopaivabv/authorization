@@ -17,8 +17,12 @@ class Todo extends Component
 
     public function render()
     {
-        return view('livewire.todo', [
-            'todos' => ModelsTodo::query()
+        return view('livewire.todo');
+    }
+
+    public function getTodosProperty()
+    {
+        return ModelsTodo::query()
             ->when($this->filter == 'done', function ($query) {
                 return $query->where('checked', true);
             })
@@ -27,7 +31,21 @@ class Todo extends Component
             })
             ->with('user')
             ->orderBy('checked')
-            ->get()
-        ]);
+            ->get();
+    }
+
+    public function getAllProperty()
+    {
+        return ModelsTodo::query()->count();
+    }
+
+    public function getDoneProperty()
+    {
+        return ModelsTodo::query()->where('checked', true)->count();
+    }
+
+    public function getPendingProperty()
+    {
+        return ModelsTodo::query()->where('checked', false)->count();
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Todo;
 
 use App\Http\Livewire\Todo as LivewireTodo;
 use App\Models\Todo;
+use App\Rules\Auth;
 use Livewire\Component;
 
 class Create extends Component
@@ -18,10 +19,11 @@ class Create extends Component
     public function save()
     {
         $this->validate([
-            'title' => 'required|min:3|max:80',
+            'title' => [new Auth(), 'required', 'min:3', 'max:80'],
         ]);
 
         $todo = Todo::create([
+            'user_id' => auth()->id(),
             'title' => $this->title,
         ]);
 

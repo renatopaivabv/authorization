@@ -1,7 +1,7 @@
 <div>
     <h2>Info</h2>
     @if(Auth::check())
-    <div class="mb-2"> Logged as {{Auth::user()->name ?? 'Null'}} </div>
+    <div class="mb-2"> Logged as {{Auth::user()->name ?? 'Guest'}} </div>
     <div class="mb-2">
         <form action="/logout" method="POST">
             @csrf
