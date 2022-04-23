@@ -12,18 +12,17 @@
     <div class="mb-2">
         <form action="/login" method="POST">
             @csrf
-            <input type="hidden" name="email" value="douglas.era@example.com">
-            <input type="hidden" name="password" value="password">
-            <input class="btn btn-secondary" type="submit" value="Login as Gunnar">
+            <input type="hidden" name="user_id" value="1">
+            <input class="btn btn-secondary" type="submit" value="Login as John">
         </form>
     </div>
 
     <div class="mb-2">
         <form action="/login" method="POST">
             @csrf
-            <input type="hidden" name="email" value="russell.pollich@example.org">
-            <input type="hidden" name="password" value="password">
-            <input class="btn btn-secondary" type="submit" value="Login as Amani">
+            <input type="hidden" name="user_id" value="2">
+
+            <input class="btn btn-secondary" type="submit" value="Login as Jane">
         </form>
     </div>
 

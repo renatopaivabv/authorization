@@ -2,16 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
 
+        // $user = User::first($request->user_id);
+        $user = User::find($request->user_id);
+        $credentials = [
+            'email' => $user->email,
+            'password' => 'password',
+        ];
         if (auth()->attempt($credentials)) {
-            return redirect()->back()->with('success', 'You are logged in');
+            return redirect()->back()->with('success', 'Login Successful');
         }
 
         return redirect()->back()->with('error', 'Invalid credentials');
