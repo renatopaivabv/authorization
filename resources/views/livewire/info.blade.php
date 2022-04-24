@@ -10,13 +10,5 @@
     <livewire:login :with="2" name="Jane" />
 
     @endif
-    <div>
-        @if(session('success'))
-        <div class="alert alert-success" role="alert">
-            {{session('success')}}
-        </div>
-        @endif
-    </div>
-
-
+    <livewire:notification />
 </div>

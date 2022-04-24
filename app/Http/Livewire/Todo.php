@@ -4,10 +4,14 @@ namespace App\Http\Livewire;
 
 use App\Models\Todo as ModelsTodo;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Todo extends Component
 {
+    use WithPagination;
+
     public string $filter = 'all';
+    protected $queryString = ['filter' => ['except' => 'all']];
 
     protected $listeners = [
         'todo::created' => '$refresh',
@@ -20,18 +24,19 @@ class Todo extends Component
         return view('livewire.todo');
     }
 
+    public function updatedFilter()
+    {
+        $this->gotoPage(1);
+    }
+
     public function getTodosProperty()
     {
         return ModelsTodo::query()
-            ->when($this->filter == 'done', function ($query) {
-                return $query->where('checked', true);
-            })
-            ->when($this->filter == 'pending', function ($query) {
-                return $query->where('checked', false);
-            })
+            ->when($this->filter == 'done', fn ($q) => $q->where('checked', true))
+            ->when($this->filter == 'pending', fn ($q) => $q->where('checked', false))
             ->with('user')
             ->orderBy('checked')
-            ->get();
+            ->paginate(5);
     }
 
     public function getAllProperty()

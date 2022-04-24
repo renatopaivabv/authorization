@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,6 +20,7 @@ class TodoFactory extends Factory
         return [
             'checked' => $this->faker->boolean,
             'title' => $this->faker->sentence,
+            'user_id' => User::all()->random()->id ?? null,
         ];
     }
 }
